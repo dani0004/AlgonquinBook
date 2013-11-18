@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<widget xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    version="1.0.0.0" id="com.example.AlgonquinBook">   
+   
+    <name>Algonquin Contacts</name> 
+    <author>Wendy-Anne Daniel</author>
+    <description>This maintains contacts at Algonquin</description>
+
+    <feature id="blackberry.ui.contextmenu" />
+    <feature id="blackberry.app" />
+    <feature id="blackberry.app.event" />
+    <feature id="blackberry.ui.menu" />
+  <feature id="blackberry.ui.dialog"/>
+  <feature id="blackberry.identity" />
+  <feature id="blackberry.system.event" />
+  <feature id = "blackberry.pim.contacts" />
+  <feature id = "blackberry.pim.calendar" />
+  <feature id="blackberry.io" />
+ 
+   <feature id = "blackberry.invoke.card" />
+  <feature id="blackberry.invoke" required="true" version="1.0.0.0"/>
+ <rim:permissions>
+	 <rim:permit>access_pimdomain_contacts</rim:permit> 
+	<rim:permit>access_pimdomain_calendars</rim:permit> 
+	<rim:permit>use_camera</rim:permit>
+	 <rim:permit>access_shared</rim:permit>
+	<rim:permit>access_location_services</rim:permit>
+</rim:permissions>
+
+  <access uri="*" subdomains="true" />
+
+
+  
+  
+    <content src="index.html"/> 
+	<icon src="images/myalglife.png"/> 
+
+</widget>

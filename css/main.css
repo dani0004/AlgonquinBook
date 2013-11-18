@@ -1,0 +1,30 @@
+*{ margin:0;padding:0;}
+html{font:150%/1.5 Arial, Helvetica, sans-serif;}
+#screen2{background-color:#CC6600;}
+#screen3{background-color:#CC6600;margin:0.15em;}
+#screen1{background-color:#CC6600;margin:0.15em;}
+body{background-color:#CC6600;margin:0.15em;}
+h1{font-size:100%;padding:2%;background-color:#999; text-transform:capitalize;}
+.row{float:left;display:inline-block;width:30%;}
+#grid2,#grid1{margin:0.5em; padding:0.3em;}
+#addBtn{width:50%; padding:0.3em;}
+.clipped{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.hdg{ background-color:#06F;color:#CCC;font-weight:bold;}
+.inputs{ clear:left; display:inline-block; float:right;width:60%;border-style:solid;
+border-color:red;border-width:1px; position:relative; top:0;}
+#lnamelabel,#fname {display:inline-block;clear:both;float:left; width:40%;}
+.labels{display:inline-block;width:30%; float:left;border-style:solid;
+border-color:red;border-width:1px; font-size:1em; height:100%;}
+/*.griditem:hover{-webkit-transform: rotate3d(0, 0, 1, 15deg);}*/
+#profilepic img{border-style:solid;border-color:#000000;border-width:1px; border-radius:10px;}
+#profilepic a:hover{background-color:#099; }
+#profilepic a{width:100%;	paddingTop:2em;}
+#profilepic2 {width:200px;	height:200px; background-color:#FFFFFF; display:inline-block; float:left}
+
+#myimage {width:150px;	height:150px; background-color:#666; margin:0 0.5em 0 0.5em ;}
+
+#profilepic3 {width:200px;	 background-color:#FFFFFF; display:inline-block; float:left;}
+.profscr3{margin:0em 2em 1em 2em; }
+.wrapper{padding:1em;}
+.otherscr3{display:inline-block;float:left; width:150px; height:150px;border:solid 2px #FFCC00; padding:0.5em;}
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<div data-bb-type="screen" id="screen8" data-bb-effect="slide-left" data-bb-indicator="true"   >
+
+ 
+<script type="text/javascript">
+				//this is a new bb.init object context
+	           window.onload=funcA();
+			
+	 function funcA(){
+             
+                  bb.init({
+                        //actionBarDark: true,
+                        //controlsDark: true,
+                        //listsDark: false,
+						
+
+                        onscreenready: function(element, id) {
+                    
+                        },
+                        ondomready: function(element, id) {
+							//alert("in on dom ready");
+                                      if (id === 'screen8') {
+                                        initGoogleMaps();
+										 var pp=document.getElementById("divTitle");
+					   					pp.innerHTML=" Algonquin Maps";
+
+                                      }
+                                    }
+                        });
+
+                  
+			 }
+    
+
+</script>				
+ 
+<div data-bb-type="title" id="divTitle" data-bb-caption="Algonquin Maps " > </div><!-- title end -->	
+
+<div id="grid1"  >	  
+	<select id="poi">
+		<option value="atm" selected="true">ATM</option>
+   		<option value="bank">Bank</option>
+    	<option value="bar">Bar</option>
+    	<option value="bus_station">Bus Station</option>
+    	<option value="convenience_store">Mac Convenience Store</option>
+    	<option value="grocery_or_supermarket">Grocery Store</option>
+    	<option value="liquor_store">Liquor Store</option>
+    	<option value="pharmacy">Pharmacy</option>
+    	<option value="shopping_mall">Shopping Mall</option>
+	</select> 
+</div>
+<div id="map_canvas" ></div>
+
+
+     
+  <div data-bb-type="action-bar"  data-bb-back-caption="">
+    	<div onclick="initGooglePlaces(document.getElementById('poi').value);"  data-bb-type="action" data-bb-style="button" data-bb-img="images/places.png">Results!</div>
+	</div>    
+       
+ 
+  
+</div> <!-- screen end -->

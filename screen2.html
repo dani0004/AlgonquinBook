@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<div data-bb-type="screen" id="screen2" data-bb-effect="slide-left" data-bb-indicator="true" >
+	<div data-bb-type="title" id="divTitle" data-bb-caption=" " > </div><!-- title end -->
+ 
+          
+	<div id="grid1" data-bb-type="grid-layout" data-bb-context="false" >
+    	<div id="imgList" data-bb-type="image-list"  data-bb-header-justify="left" data-bb-header-style="solid" data-bb-style="arrowlist" >
+   		<div data-bb-type="header">Contacts</div>
+     <!--     <div data-bb-type="item" data-bb-img=" " > Contact1</div>
+          <div data-bb-type="item" data-bb-img=" "  >Contact2</div> 
+          <div data-bb-type="item" data-bb-img=" " >Contact3</div> -->
+      
+   	</div> <!-- imglist close -->
+   </div> <!-- grid1 close -->
+   
+   	<div id="grid2" data-bb-type="grid-layout"  >
+  
+  <div  data-bb-type="bbm-bubble" data-bb-style="left">
+		<div data-bb-type="item" >Tap image to take picture</div> 
+	</div>
+    
+     <div id="row1" data-bb-type="row" data-bb-style="square"  data-bb-columns="3" >
+   
+    
+  
+     <div id="profilepic4" ><img class="img1" src="images/ic_contacts.png" id="myimage" width="150px" height="150px" alt="person photo" ></div>
+     
+     
+     
+     </div> <!-- end row -->
+    <div data-bb-type="scroll-panel" style="height:650px">
+         <!-- Some content -->
+  
+   
+        <div   data-bb-type="round-panel"  >   
+        <div   data-bb-type="label-control-container">
+    	<div   data-bb-type="row">
+            <div    id="fnamelabel" data-bb-type="label">First Name:</div>
+            <input  id="fname"  type="text" value="" data-bb-clear="true" disabled="true"/> 
+             </div><!-- row1 end --> 
+        </div><!-- label control container end --> 
+          </div><!-- round panel container end -->
+          
+         
+          <div  data-bb-type="round-panel">   
+        <div  data-bb-type="label-control-container">
+          <div  data-bb-type="row">
+          <div    id="lnamelabel" data-bb-type="label">Last Name:</div>
+  <input  id="lname"  type="text" value=" " data-bb-clear="true" disabled="true"/>
+          </div><!-- row2 end --> 
+         </div><!-- label control container end -->
+         </div><!-- round panel container end -->
+         
+           <div data-bb-type="round-panel">   
+        <div data-bb-type="label-control-container">
+          <div data-bb-type="row">
+          <div    id="mphonelabel" data-bb-type="label">Mobile Phone:</div>
+  <input  id="mphone"  type="tel" value="" data-bb-clear="true" disabled="true"/>
+          </div><!-- row2 end --> 
+         </div><!-- label control container end -->
+         </div><!-- round panel container end -->
+         
+          <div data-bb-type="round-panel">   
+        <div data-bb-type="label-control-container">
+          <div data-bb-type="row">
+          <div    id="hphonelabel" data-bb-type="label">Home Phone:</div>
+  <input  id="hphone"  type="tel" value="" data-bb-clear="true" disabled="true"/>
+          </div><!-- row2 end --> 
+         </div><!-- label control container end -->
+         </div><!-- round panel container end -->
+         
+           <div data-bb-type="round-panel">   
+        <div data-bb-type="label-control-container">
+          <div data-bb-type="row">
+          <div    id="wemaillabel" data-bb-type="label">Work email:</div>
+  <input  id="wemail"  type="email" value="" data-bb-clear="true" disabled="true"/>
+          </div><!-- row2 end --> 
+         </div><!-- label control container end -->
+         </div><!-- round panel container end -->
+         
+          <div data-bb-type="round-panel">   
+        <div data-bb-type="label-control-container">
+          <div data-bb-type="row">
+          <div    id="hemaillabel" data-bb-type="label">Home email:</div>
+  <input  id="hemail"  type="email" value="" data-bb-clear="true" disabled="true"/>
+          </div><!-- row2 end --> 
+         </div><!-- label control container end -->
+         </div><!-- round panel container end -->
+         
+          <div data-bb-type="round-panel">   
+        <div data-bb-type="label-control-container">
+          <div data-bb-type="row">
+          <div    id="wemetlabel" data-bb-type="label">How we met:</div>
+  <input  id="wemet"  type="text" value="" data-bb-clear="true" disabled="true"/>
+          </div><!-- row2 end --> 
+         </div><!-- label control container end -->
+         </div><!-- round panel container end -->
+     <!--    <div data-bb-type="row">
+			  <div id="addBtn" data-bb-type="button" onclick="addContact();" >Add Contact </div>
+        </div> -->
+        </div> <!-- scroll panel end -->
+   
+	</div><!-- grid2 end -->
+
+
+	<div id="abar" data-bb-type="action-bar" data-bb-back-caption="">
+      <div id="tab1" data-bb-type="action" data-bb-img="images/addcontact2.png" data-bb-style="button" data-bb-overflow="false" onclick="addTab('addContact')">Add Contact</div>
+      <div id="tab2" data-bb-type="action" data-bb-style="button" data-bb-img="images/listcontacts3.png"  onclick="addTab('contacts')">Contacts</div>    
+   
+  	</div><!-- abar end -->
+  
+</div> <!-- screen end -->
