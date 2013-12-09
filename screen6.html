@@ -1,22 +1,95 @@
 <!DOCTYPE html>
-<div data-bb-type="screen" data-bb-effect="fade" >
-  <div data-bb-type="title" id="divTitle" data-bb-caption="Remic Rapids Map" > </div>
-  <div data-bb-type="grid-layout"  >
-  <div data-bb-type="row">
-              
-              <div data-bb-type="item" data-bb-img="images/remic2.png"  ></div> 
-               </div> 
-          </div>
-   <div data-bb-type="row">
-              <div data-bb-type="item"  ></div> 
-             
-               <div data-bb-type="item"  ></div> 
-          </div> 
+<div data-bb-type="screen" id="screen6" data-bb-effect="slide-left" >
+<div data-bb-type="title" id="divTitle" data-bb-caption=" " > </div><!-- title end -->
+ 
+ <div id="grid1">
+ 
+       <div  class="selector" id="semester">
+    	<select  onchange="sendSelected('sem')" id="sem">
+          <option id="1a1" value="1a1" selected="true" >Fall</option>
+          <option id="2a1" value="2a1">Winter</option>
+          <option id="3a1" value="3a1">Summer</option>
+         
+      </select>
+ 
+    </div>
+ <div class="selector" id="deleteBtn" >Delete</div>   
    
+ 	<div    class="inputs">
+          
+            <input  id="cname"  type="text" value="Course Name" data-bb-clear="true" /> 
+      </div><!-- row1 end --> 
+      
+      <div    class="inputs">
+          
+            <input  id="clnum"  type="text" value="Classroom #" data-bb-clear="true" /> 
+      </div><!-- row2 end --> 
+       <div  class="selector" id="dayofweekPicker">
+    	<select  onchange="sendSelected('dow')" id="dow">
+          <option id="11" value="11" selected="true">Monday</option>
+          <option id="22" value="22">Tuesday</option>
+          <option id="33" value="33">Wednesday</option>
+          <option id="44" value="44">Thursday</option>
+          <option id="55" value="55">Friday</option>
+      </select>
+    </div>
+    
+    <div   id="timepicker" class="selector choosetime"><p id="ptime">Choose Time</p>
+    </div>
   
-  <div data-bb-type="action-bar" data-bb-back-caption="">
-      <div data-bb-type="action" data-bb-style="button" data-bb-img="images/gearwheel.png" data-bb-overflow="false" >Add</div>
-       
-  </div>
-</div>  
+  
+     <div  class="selector" id="durationPicker">
+    	<select  onchange="sendSelected('dur')" id="duration">
+          <option id="111" value="111" selected="true">1 Hour</option>
+          <option id="130" value="130">1 Hour 30 min</option>
+          <option id="222" value="222">2 Hours</option>
+          <option id="230" value="230">2 Hours 30 min</option>
+          <option id="333" value="333">3 Hours</option>
+          <option id="330" value="330">3 Hours 30 min</option>
+      </select>
+    </div>
+  <div id="classdescr">
+    <p>This class is a lab:</p>
+    <div id="toggle1" data-bb-checked="false" data-bb-type="toggle" data-bb-on="On" data-bb-off="Off" onchange="sendToggle('toggle1')"></div>
+</div>
 
+<div id="reminder">
+<p>Reminder</p>
+<div  class="selector notifier" id="notifyPicker">
+    	<select  onchange="sendSelected('nots')" id="nots">
+          <option value="15" selected="true">15 min</option>
+          <option value="30">30 min</option>
+          <option value="1h">1 Hour</option>
+       </select>
+    </div>
+<div id="toggle2" data-bb-checked="false" data-bb-type="toggle" data-bb-on="On" data-bb-off="Off" onchange="sendToggle('toggle2')"></div>
+</div>
+ 
+  </div> <!-- grid 1 end --> 
+  
+  <div id="grid2">
+  	<div class="calwrapper">
+    <div id="calitem">
+    
+    	
+    </div><!-- calitem close -->
+    </div><!-- calwrapper close -->
+    
+    
+
+  </div>          
+ 
+     
+ 
+
+	<div id="abar" data-bb-type="action-bar" data-bb-back-caption="">
+      <div id="tab1" data-bb-type="action" data-bb-img="images/ic_edit.png" data-bb-style="button"  onclick="addTab('editAdd')">Edit/Add</div>
+      <div id="tab2" data-bb-type="action" data-bb-style="button" data-bb-img="images/ic_view_list.png"  onclick="addTab('viewall')">ViewAll</div> 
+      <div id="tab3" data-bb-type="action" data-bb-style="button" data-bb-img="images/ic_add_entry.png"  onclick="addTab('add')">Add</div>       
+   
+  	</div><!-- abar end -->
+      
+       
+ 
+  
+</div> <!-- screen end -->

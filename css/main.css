@@ -15,7 +15,7 @@ border-color:red;border-width:1px; position:relative; top:0;}
 #lnamelabel,#fname {display:inline-block;clear:both;float:left; width:40%;}
 .labels{display:inline-block;width:30%; float:left;border-style:solid;
 border-color:red;border-width:1px; font-size:1em; height:100%;}
-/*.griditem:hover{-webkit-transform: rotate3d(0, 0, 1, 15deg);}*/
+
 #profilepic img{border-style:solid;border-color:#000000;border-width:1px; border-radius:10px;}
 #profilepic a:hover{background-color:#099; }
 #profilepic a{width:100%;	paddingTop:2em;}
@@ -27,4 +27,35 @@ border-color:red;border-width:1px; font-size:1em; height:100%;}
 .profscr3{margin:0em 2em 1em 2em; }
 .wrapper{padding:1em;}
 .otherscr3{display:inline-block;float:left; width:150px; height:150px;border:solid 2px #FFCC00; padding:0.5em;}
+.selector{display:inline-block;float:left; width:50%;}
+#durationPicker {width:60%;}
+.inputs{margin:0.2em 0.2em 0.2em 0.2em; width:100%}
+p {clear:both;display:inline-block;width:50%;float:left;padding:0.5em 0.5em 0 0;}
+#toggle2,
+#toggle1{display:inline-block;width:40%;float:left;}
+#classdescr{margin:0.2em 0.5em 0.2em 0.2em; }
+#reminder{clear:both;border:1px solid #333; background-color:#900;height:6em;}
+#reminder p{ padding:0.5em 0 0 0.5em; color:#CCC;}
+.choosetime{background-color:#666;height:2em;border-radius:12px;margin:0.5em 0 0 0 ;}
+.choosetime p{padding:0.2em 0 0 1em; color:#CCC;font-size:0.8em;}
+.timeslot{margin:0.5em 0.5em 0.5em 0.5em ; border:solid #900 1px;display:inline-block;float:left;width:30%;height:2em;padding:0.2em 0 0 1em;}
+
+.editbutton2{clear:both;width:15%;float:right;border:2px solid #333; background-color:#999;height:1em; border-radius:12px; padding:0 0.6em 0.6em 1.75em;}
+#deleteBtn
+{display:inline-block;float:left;width:25%;border:2px solid #333; background-color:#900;height:1em; border-radius:12px; padding:0 0.6em 0.6em 1.75em;color:#FFF;margin:0.8em 0 0.3em 1.3em;}
+.editbutton2 p{color:#000;}
+.sendright p,
+#evstarttime p,
+.sendright{display:inline-block;float:left; width:50%;}
+#evsummary {clear:both;width:50%;float:left; display:inline-block;}
+#evlocation {width:50%;}
+#evstarttime {width:50%;float:left; display:inline-block;} 
+#evlocation p,
+#evsummary p {display:inline-block; width:60%;}
+#calday p{font-weight:bold;}
+#evitem {border-bottom:1px solid #666;}
+#wrapper {padding:0 0.5em 0.5em 0.5em; width:100%;}
+#wrapper p{display:block; width:100%;}
+
+
 

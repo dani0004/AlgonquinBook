@@ -5,8 +5,6 @@ var elementE=null;
 var idE=null;
 sqlQuery=" ";
 var contacts;
-var longinfo=false;
-var html;
 var abooknamespace;
 var resultset=null;
 var resultset2=null;
@@ -36,7 +34,6 @@ var staticImage="images/ic_contacts.png";
 blackberry.io.sandbox = false;
 var calendar;
 var recEvent;
-var json;
 var monevents=new Array(),tueevents=new Array(),wedevents=new Array(),
 		thuevents=new Array(),frievents=new Array();
 
@@ -49,7 +46,7 @@ var monthNameLookup={"1":"Jan","2":"Feb","3":"Mar","4":"Apr","5":"May","6":"Jun"
  				"10":"Oct","11":"Nov","12":"Dec"};	
 var dowlookup={"11":1,"22":2,"33":3,"44":4,"55":5}	;						
  
-
+ 
  
 
 window.onload=init;
@@ -86,12 +83,7 @@ function init(){
 			
 				if(id=="screen1"){
 				}
-				if(id=="screen11")
-				{
-					
-					navigateToServices(element);
-					
-				}//end id==screen11
+				
 				
 				if(id=="screen2"){
 		
@@ -313,8 +305,7 @@ j++;
 		
 			}
 		}//end of if id=screen6
-		
-		
+			
 
 console.log("on screen ready 2");
 
@@ -348,27 +339,6 @@ console.log("on screen ready 2");
 		
 	
 	}
-	if(id=="screen11" )
-	{
-				
-		document.getElementById('imgList').refresh(items);
-	}
-	if(id=="screen12" )
-	{
-		if(longinfo)
-		{
-			var html=" ";
-			for (i=0;i<items.length;i++){
-				html+=items[i];
-			}
-			
-			$("#wrapper").html(html);
-		}
-		else{
-				
-		document.getElementById('imgList2').refresh(items);
-		}
-	}
 	if(id=="screen6" && viewCourses==1){
 		try{
 			//alert("start scr6 an dvc=1");
@@ -393,7 +363,7 @@ console.log("on screen ready 2");
 		catch(e){alert("Exception in setting scrren6domready "+e.message);}
 	}
 	
-			}//end id screen6
+			}
 			
 						
 			});
@@ -485,11 +455,6 @@ function navigateTo(target){
 			  break;
 			  case "timetable":
 			  navigateToTimetable(0);
-			  break;
-			  case "services":
-			  
-			  bb.pushScreen('screen11.html','screen11',{title:"Campus Services"});
-			  
 			  break;
 		  }
 		
@@ -2688,166 +2653,6 @@ function initializeCourseDetails(){
 	
 }
 /*******END SCREEN 10 FUNCTIONS ********/
-/*****START SCREEN 11 & 12 FUNCTIONS *********/
-
-function navigateToServices(element){
-	try{
-		//read the json
-		
-		loadJSON(function (response){
-			
-			
-			 json=eval(response);
-			
-			var len=json.services.length;
-			items.length=0;
-			
-		 for (var i=0;i<len;i++){
-			 //alert("in loop creating items ");
-			 
-			 createSingleListFragment(json.services[i].type,json.services[i].id);
-	
-		 }
-			
-			
-		});
-		
-		
-	}
-	catch(e){alert("exception thrown in navigate to services "+e.message);}
-}
-function loadJSON(callback) {   
-
-    var xobj = new XMLHttpRequest();
-	
-        xobj.overrideMimeType("application/json");
-	xobj.open('GET', 'services.json', false); 
-	xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-			
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);  
- }
-
-function createListFragment(places,htitle){
-	
-	try{
-		items.length=0;
-		longinfo=false;
-		
-		var len=places.length;
-		
-		
-		for (var i=0;i<len;i++){
-		
-		 item = document.createElement('div');
-		 //alert(item);
-		 item.setAttribute('data-bb-type','item');
-		
-	
-		 item.setAttribute('data-bb-title',places[i].name);
-		 item.setAttribute('data-id',places[i].id);
-		 
-		
-		 item.innerHTML = places[i].location;
-		
-	
-		 items.push(item);	
-		}
-		bb.pushScreen("screen12.html","screen12",{title:htitle});
-	}
-	catch(e){alert("exception thrown in createListFragment "+e.message);}
-}
-function createHealthListFragment(places,htitle,pos){
-	
-	try{
-		items.length=0;
-		longinfo=true;
-		var len=places.length;
-		
-		
-		for (var i=0;i<len;i++){
-		
-		
-		item="<p>"+places[i].name+"</p>"; 
-		 item+="<p>"+json.services[pos].type+","+places[i].location+"</p>";
-		item+="<p>"+places[i].address1+"</p>";
-		 item+="<p>"+places[i].address2+"</p>";
-		 item+="<p>"+places[i].tel+"</p>";
-		 item+="<p>"+places[i].fax+"</p>";
-		  item+="<p>&nbsp;</p>";
-		 
-		
-	
-		 items.push(item);	
-		}
-		bb.pushScreen("screen12.html","screen12",{title:htitle});
-	}
-	catch(e){alert("exception thrown in createListFragment "+e.message);}
-}
-/* create the list of services **/
-function createSingleListFragment(aa,id){
-	
-	try{
-		
-		
-		//items.length=0;
-		
-		 item = document.createElement('div');
-		
-		 item.setAttribute('data-bb-type','item');
-		 
-	
-		 item.setAttribute('data-bb-title',aa);
-		 item.setAttribute('data-id',id);
-		 
-		
-		 item.innerHTML = " ";
-		
-		
-		item.onclick = function(){showServiceDetails(document.getElementById("imgList").selected)};
-		
-		
-		 items.push(item);	
-		
-	}
-	catch(e){alert("exception thrown in create single fragment "+e.message);}
-}
-
-function showServiceDetails(aa){
-	
-	try{
-		
-		var ppp=aa.getAttribute("data-id");
-		
-		
-			var len=json.services.length,htitle;
-			
-		 for (var i=0;i<len;i++){
-			
-			 
-			 if((json.services[i].id)==(ppp)){
-			 	
-				htitle=json.services[i].type;
-				if(json.services[i].id=="hs"){
-				 createHealthListFragment(json.services[i].places,htitle,i);
-				 break;}
-				 else{
-					 createListFragment(json.services[i].places,htitle);
-					 break;
-				 }
-			 }
-	
-		 }
-		
-		
-	}
-	catch(e){alert("exception thrown in showServiceDetails "+e.message);}
-}
-/******END SCREEN 11 FUNCTIONS **********/
 
 
 

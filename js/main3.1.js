@@ -5,9 +5,7 @@ var elementE=null;
 var idE=null;
 sqlQuery=" ";
 var contacts;
-var longinfo=false;
-var html;
-var abooknamespace;
+
 var resultset=null;
 var resultset2=null;
 var resultset3=new Array();
@@ -19,8 +17,7 @@ var currentId=null;
 var aaa=new Array();
 var items = [],
       item;
-var editstate=false;
-var deletestate=false;	  
+var editstate=false;	  
 var myLat;
 var myLong;
 var personimgPath=" ";
@@ -36,7 +33,6 @@ var staticImage="images/ic_contacts.png";
 blackberry.io.sandbox = false;
 var calendar;
 var recEvent;
-var json;
 var monevents=new Array(),tueevents=new Array(),wedevents=new Array(),
 		thuevents=new Array(),frievents=new Array();
 
@@ -49,7 +45,7 @@ var monthNameLookup={"1":"Jan","2":"Feb","3":"Mar","4":"Apr","5":"May","6":"Jun"
  				"10":"Oct","11":"Nov","12":"Dec"};	
 var dowlookup={"11":1,"22":2,"33":3,"44":4,"55":5}	;						
  
-
+ 
  
 
 window.onload=init;
@@ -86,12 +82,7 @@ function init(){
 			
 				if(id=="screen1"){
 				}
-				if(id=="screen11")
-				{
-					
-					navigateToServices(element);
-					
-				}//end id==screen11
+				
 				
 				if(id=="screen2"){
 		
@@ -112,7 +103,7 @@ function init(){
 							p=element.getElementById("grid1");
 							p.style.visibility="visible";
 							p.style.display="block";
-							//alert("before select all photos");
+							alert("before select all photos");
 							selectAllPhotos();
 							selectAllDesc();
 							
@@ -234,14 +225,12 @@ j++;
 			try{
 				if(!editstate) courseDetails.length=0;	
 				if(courseDetails.rawtime!=null)
-					{
+				{
 					var sdd=" PM";
 					var sd =courseDetails.rawtime.split(":");
-					if(sd[0]<7) sdd=" AM"; 
-			(element.getElementById("ptime")).innerHTML=courseDetails.rawtime;		
-			if(	courseDetails.rawtime.length<7)	
-				(element.getElementById("ptime")).innerHTML=courseDetails.rawtime+sdd;
-			
+					if(sd[0]<12) sdd=" AM"; 
+					
+			(element.getElementById("ptime")).innerHTML=courseDetails.rawtime+sdd;
 				}
 				else
 				(element.getElementById("ptime")).innerHTML="Choose Time";	
@@ -308,13 +297,15 @@ j++;
 		
 				
 				var tt=element.getElementById("divTitle");
+				//tt.setAttribute("data-bb-action-caption","Delete");
+				//tt.setAttribute("onactionclick","deleteCourse()");
 				
+				//alert("before list all events");
 				listAllEvents(30);
 		
 			}
 		}//end of if id=screen6
-		
-		
+			
 
 console.log("on screen ready 2");
 
@@ -328,7 +319,7 @@ console.log("on screen ready 2");
 	$("#oimg1").click(function(){navigateToCamera("otherImg1")});
 	$("#oimg2").click(function(){navigateToCamera("otherImg2")});
 	$("#oimg3").click(function(){navigateToCamera("otherImg3")});
-	
+	//$(".editButton").click(function(ev){editCalendaritem(ev)});
 	$(".timeslot").click(function(ev){selectTime(ev)});
 	$(".editbutton2").click(function(ev){editCalendaritem(ev)});
 	$("#deleteBtn").click(function(ev){deleteEventitem(ev)});
@@ -347,27 +338,6 @@ console.log("on screen ready 2");
 		$("#timepicker").click(function(){chooseTime()});
 		
 	
-	}
-	if(id=="screen11" )
-	{
-				
-		document.getElementById('imgList').refresh(items);
-	}
-	if(id=="screen12" )
-	{
-		if(longinfo)
-		{
-			var html=" ";
-			for (i=0;i<items.length;i++){
-				html+=items[i];
-			}
-			
-			$("#wrapper").html(html);
-		}
-		else{
-				
-		document.getElementById('imgList2').refresh(items);
-		}
 	}
 	if(id=="screen6" && viewCourses==1){
 		try{
@@ -393,7 +363,7 @@ console.log("on screen ready 2");
 		catch(e){alert("Exception in setting scrren6domready "+e.message);}
 	}
 	
-			}//end id screen6
+			}
 			
 						
 			});
@@ -443,7 +413,9 @@ function addWorkerThreads2(){
 			if(e.data!=null)
 			{
 				var pp=e.data[0];
-				
+				alert(pp.plink);
+				//alert(pp.plink);
+				alert("after plink");
 				contactDetails["photoLink"]=pp.plink;
 			}
 					
@@ -485,11 +457,6 @@ function navigateTo(target){
 			  break;
 			  case "timetable":
 			  navigateToTimetable(0);
-			  break;
-			  case "services":
-			  
-			  bb.pushScreen('screen11.html','screen11',{title:"Campus Services"});
-			  
 			  break;
 		  }
 		
@@ -702,7 +669,7 @@ function invokeFileInPickerModeSaver() {
 function invokeFilePicker(details) {
 	alert("in invoke file picker details" );
      blackberry.invoke.card.invokeFilePicker(details, function (path) {
-             // alert("saved "+ path);
+              alert("saved "+ path);
           },
           function (reason) {
               alert("cancelled " + reason);
@@ -747,7 +714,18 @@ function showContactDetails(ev){
 		worker3.postMessage({"contact":contact});
 		
 		
-	
+		//alert(JSON.stringify(contact.phoneNumbers[0]));
+		
+		//populate the document or the contactdesc array
+	/*	contactDetails["fname"]=contact.name.givenName;
+		contactDetails["lname"]=contact.name.familyName;
+		contactDetails["mphone"]=contact.phoneNumbers[0].value;
+		contactDetails["hphone"]=contact.phoneNumbers[1].value;
+		contactDetails["wemail"]=contact.emails[0].value;
+		contactDetails["hemail"]=contact.emails[1].value;
+		*/
+		
+		//alert("after populating contact details");
 	
 		//get contact desc from the database
 		selectSingleContact(ppp.trim());
@@ -771,7 +749,7 @@ function addTab(a){
 	if(a=="contacts"){
 		//alert("a is contactlist");
 	viewDatabase=1;	
-	bb.pushScreen('screen2.html','screen2',{title:"Algonquin Contact List"});
+	bb.pushScreen('screen2.html','screen2',{title:"Algonquin Contact List",state:"any"});
 	
 		}
 	if(a=="addContact"){
@@ -869,19 +847,12 @@ function  getSpecificContactId(){
 /************DATABASE OPERATIONS***************/
 function initializeDatabase(){
 	//console.log("in init db");
-	if (typeof mynamespace === 'undefined') {
-    abooknamespace = {};
-	}
 	
 	if(!window.openDatabase){console.log("not supported");}
     console.log(" initializeDatabase: after checking database support ");
   	 //db = window.openDatabase("autos2", "1.0", "autos2", 1024*1024*100);
-        abooknamespace.db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
-		db=abooknamespace.db;
-		
+        db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
     console.log(" initializeDatabase: after open db ");
-	
-	
 	
 	 db.transaction( doTrans1x,function(trans,data){alert("contacts doTrans1x success");
 
@@ -898,11 +869,6 @@ function initializeDatabase(){
 		});				
 
 }
-function onDBCreate(database) {
-        //Attach the database because "window.openDatabase" would not have returned it
-        abooknamespace.db = database;
-        
-    }
 function doTrans1x( trans ){
 	
   
@@ -985,7 +951,7 @@ function createDatabaseEvent(){
 	 
 	  trans.executeSql(sqlQuery,[],function(trans,data){
 		
-		//alert("saving cal event success!!!");
+		alert("saving cal event success!!!");
 		
 		
 		});
@@ -1006,9 +972,8 @@ function selectAllEvents(){
 		//sqlQuery="SELECT contactId,photolink from AlgPhotos ORDER BY contactId ASC";
 		sqlQuery="SELECT * from Algcal ORDER BY eventId ASC";
 		//alert(sqlQuery);
-		db=abooknamespace.db;
 		
-		//db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
+		db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 		//alert("after getting db");
 		if(resultset7!=null) resultset7.rows.length=0;	
   db.transaction( function(trans){
@@ -1128,17 +1093,17 @@ function createDatabasePhotos(cid,plink){
 }
 function selectAllPhotos(){
 	try{
-		//alert("start select all photos");
+		alert("start select all photos");
 		//sqlQuery="SELECT contactId,photolink from AlgPhotos ORDER BY contactId ASC";
 		sqlQuery="SELECT * from AlgPhotos ORDER BY contactId ASC";
 		//alert(sqlQuery);
-		db=abooknamespace.db;
 		
+		db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 		//alert("after getting db");
 		if(resultset4!=null) resultset4.rows.length=0;	
   db.transaction( function(trans){
 	  trans.executeSql(sqlQuery,[],function(trans,data){
-		//alert("select all photos success!!!");	
+		alert("select all photos success!!!");	
 			resultset4=data; 
 			//var len=resultset4.rows.length; 
 		//alert(len);
@@ -1167,9 +1132,7 @@ function selectPhoto(){
 		
 		//alert(sqlQuery);
 		if(resultset!=null) resultset.length=0;
-		db=abooknamespace.db;
-		
-		//db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
+		db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 		//alert("after getting db");	
   db.transaction( doTrans3xb,function(trans,data){alert("contacts doTrans3x success");});
 
@@ -1183,9 +1146,8 @@ function selectContactPhoto(){
 	try{
 		sqlQuery="SELECT photolink from AlgPhotos WHERE (contactId="+contactDetails.contactId +" AND  type=0)";
 		
-		db=abooknamespace.db;
 		
-		//db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
+		db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 	
   db.transaction( doTrans3xa,function(trans,data){alert("contacts doTrans3x success");});
 
@@ -1255,12 +1217,10 @@ function doTrans3xa(trans){
 }
 /* select all for display in the list **/
 function selectAllDesc(){
-	//alert("start select all desc");
+	alert("start select all desc");
 	try{
 		if(resultset!=null) resultset.length=0;
-		db=abooknamespace.db;
-		
-		//db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
+		db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 		//alert("after getting db");	
  
  db.transaction( doTrans2x,function(error){console.log(error)},function(trans,data){//alert("PPPPPcontacts doTrans2x success");
@@ -1277,13 +1237,13 @@ function doTrans2x(trans){
 	try{
 		
 		 sqlQuery="SELECT * FROM AlgContacts ";
-		// alert(sqlQuery);
+		 alert(sqlQuery);
  		if(resultset!=null) resultset.rows.length=0;
 		 trans.executeSql(sqlQuery,[],function(trans,data){
-		//alert("success");
+		alert("success");
 			resultset=data; //norows=1;}	
 			var len=resultset.rows.length; //var i=0;
-		//alert("result set length is "+len);
+		alert("result set length is "+len);
 			
 			if(len>0){
 				findContactsById();
@@ -1305,9 +1265,7 @@ function selectSingleContact(aa){
 	try{
 		currentContact=aa;
 		//alert("start select single contact");
-		db=abooknamespace.db;
-		
-		//db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
+		db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 		
 		 db.transaction( doTrans3x,function(error){console.log(error)},function(trans,data){//alert("PPPPPcontacts doTrans2x success");
 		
@@ -1418,7 +1376,7 @@ function deleteCalEvents(flagfordelete){
 	 
 	  trans.executeSql(sqlQuery,[],function(trans,data){
 		
-		//alert("success delete!!!");
+		alert("success delete!!!");
 	
 		});
 	 },function(error){alert(error);alert(error.code);alert(error.message)},function(trans,data){			
@@ -1439,7 +1397,54 @@ function deleteCalEvents(flagfordelete){
 
 /************START ACCESS CONTACT LIST*************/
 
-
+/*function listAllContacts() {
+	try{
+		alert("in list all contacts");
+		var contact = new blackberry.pim.contacts.Contact();
+		alert("after creating contacts class");
+    ContactFindOptions =  contact.ContactFindOptions;
+	alert("in list all contacts");
+	alert(contact);
+	//var contact2=blackberry.pim.contacts.getContactById(1);
+	//alert("contact is ");
+	//alert(contact2);
+	
+	//alert(JSON.stringify(contacts, null, 4));
+	//alert("after stringify");
+	//alert(ContactFindOptions.SORT_FIELD_FAMILY_NAME);
+	//alert("in list all contacts #2a");
+	//alert(ContactFindOptions.SORT_FIELD_GIVEN_NAME);
+	//alert("in list all contacts #2");
+   /* var sort = [{
+             "fieldName": ContactFindOptions.SORT_FIELD_FAMILY_NAME,
+             "desc": false
+        }, {
+             "fieldName": ContactFindOptions.SORT_FIELD_GIVEN_NAME,
+             "desc": true
+        }];*/
+		//alert("after sort #3");
+        // no filter - return all contacts*/
+	/*	findOptions = new blackberry.pim.contacts.ContactFindOptions();
+		findOptions.filter = [
+                        {fieldName: blackberry.pim.contacts.ContactFindOptions.SEARCH_FIELD_FAMILY_NAME, fieldValue: "Horrow"}
+                ];
+		findOptions.sort = [
+                        {fieldName: blackberry.pim.contacts.ContactFindOptions.SORT_FIELD_GIVEN_NAME, desc: true},
+                        {fieldName: blackberry.pim.contacts.ContactFindOptions.SORT_FIELD_FAMILY_NAME, desc: false}
+                ];
+				findOptions.limit = 5;
+				alert("before calling find");	
+		blackberry.pim.contacts.find(["firstName"], null, onFindSuccess, onFindError);			
+        findOptions = { 
+             // sort contacts first by family name (desc), then by given name (asc)
+             //sort: sort,  
+             limit: 20     // limit - return up to 20 contacts
+        };
+    // The first 20 contacts (based on specified sort specs) will be returned
+	
+   // contact.find(["name"], findOptions, onFindSuccess, onFindError);
+	}catch(e){alert("exception"+e.message);}
+}*/
 /* The functions that format the name displayed **/
 function formatName(givenName,familyName){
 	try{
@@ -1464,8 +1469,8 @@ function onFindError(error){
 	
 	alert("Contacts Find: error");
 	
-	//alert("in contacts find error");
-	//alert(error.code);
+	alert("in contacts find error");
+	alert(error.code);
 	switch (error.code) {
     case error.UNKNOWN_ERROR:
          alert("Contact find error: An unknown error occurred");
@@ -1582,10 +1587,10 @@ function populateArray(){
 /* finds the contact and shows it on the page */
 function findContactsById() {
 	try{
-	//alert("MMMMMMin find contacts by id");
+	alert("MMMMMMin find contacts by id");
 	
 	var len=resultset.rows.length;
-	//alert("$$$ length of how_met is "+len);
+	alert("$$$ length of how_met is "+len);
 	contacts = blackberry.pim.contacts;
 
 	var contact,aa,i,fname=" ",j=0;
@@ -1593,7 +1598,7 @@ function findContactsById() {
 	items.length=0;
 	for( i=0;i<len;i++)
 	{
-		//alert("in loop");
+		alert("in loop");
 		contactDetails["photoLink"]=staticImage;
 		
 		contactDetails["type"]=0;
@@ -1601,10 +1606,10 @@ function findContactsById() {
 		
 		aa=resultset.rows.item(i).contactId.toString();
 		currentContact=aa;
-		//alert(currentContact);
+		alert(currentContact);
 	
 		var plink2=getplink(currentContact);
-		//alert(plink2);
+		alert(plink2);
 		if(plink2!=null){
 			if(plink2.length>5)
 				contactDetails["photoLink"]=plink2;
@@ -1616,9 +1621,8 @@ function findContactsById() {
 	
 		
 		if(contact){
-		//alert("creating elements");
+		alert("creating elements");
 		 item = document.createElement('div');
-		 //alert(item);
 		 item.setAttribute('data-bb-type','item');
 		 fname=formatName(contact.name.givenName,contact.name.familyName);
 	
@@ -1635,7 +1639,7 @@ function findContactsById() {
 		item.setAttribute('data-bb-img',"images/ic_contacts.png");
 		//item.setAttribute('data-bb-img',contactDetails.photoLink);
 		 items.push(item);			
- //alert("after items push");
+ alert("after items push");
 		}
 		else {
       // alert("There is no contact with id: " + aa);
@@ -1644,7 +1648,7 @@ function findContactsById() {
 	
 	}//end for
 		//alert("!!!!before appending html");
-		document.getElementById('imgList').refresh(items);
+		//document.getElementById('imgList').refresh(items);
 		//alert("after appending html");
    }
 	catch(e){alert("exception in getcontactbyid "+e.message);}
@@ -1794,7 +1798,13 @@ function getCalendarItem(id){
 			//alert("dd2 is "+dd2);
 			//alert("dd1 is "+dd1);
 			//alert("@@@ dhrs is "+dhrs);
-			var dmins=mm2-mm1;
+			var dmins;
+			if(mm1>mm2)
+			 dmins=mm1-mm2;
+			else if(mm1<mm2)
+				{dmins=60+mm1-mm2;dhrs--;}
+			
+				 
 			if(dhrs==1 && dmins==0) courseDetails.duration="111";
 			if(dhrs==1 && dmins==30) courseDetails.duration="130";
 			if(dhrs==2 && dmins==0) courseDetails.duration="222";
@@ -1807,12 +1817,20 @@ function getCalendarItem(id){
 			var rmins=evt.start.getMinutes();
 			if( rmins==0) rmins=rmins+"0";	
 			courseDetails.rawtime=evt.start.getHours() +":"+rmins;
+			//courseDetails.endtimefull=evt.end;
+			//courseDetails.rawendhrs=evt.end.getHours();
+			//courseDetails.rawendmins=evt.end.getMinutes();
+			//var duration;
+			//if(courseDetails.rawendmins<rmins)
+			////{courseDetails.rawendhrs--;
+			//courseDetails.rawendmins+=60;
+			//duration=courseDetails.rawendhrs-}
 			 //alert(evt.recurrence);
 			 //var ep=(evt.recurrence).frequency;
 			// alert(ep);
 			var expmonth;
 			var expmonth=evt.start.getMonth();
-			//alert(expmonth);
+			alert(expmonth);
 			
 		/*	var expdate=(evt.recurrence).expires;
 			if(expdate==null) expmonth=11;
@@ -1847,12 +1865,10 @@ function getCalendarItem(id){
 /* the function addCourse 
 * this function is called by the save button
 * on the Add/Edit Calendar screen
-* An update is treated as a delete and create
 **/
 function addCourse(){
 	try{
-		var ev;
-		if(editstate) {deletestate=true;deleteEventitem(ev);}
+		
 		//alert("start addcourse ");
 		courseDetails["cname"]=document.getElementById("cname").value;
 		
@@ -1860,14 +1876,15 @@ function addCourse(){
 		if(courseDetails.lab)
 			courseDetails["croom"]="Lab "+courseDetails["croom"];
 		//alert("before calculate date ");
-		calculateDate();
+		//if(editstate)
+			//getStartEndDates();	
+		//else
+			calculateDate();
 		//alert("before repeat ");
 		
 		//createEventInDefaultCalendarFolder();
 		createEventRepeatEvent();
-		//if the user updated anything and saved
-		//viewCourses=1;
-		bb.pushScreen("screen6.html","screen6",{title:"My Timetable", state:"add"});
+		
 		
 	}
 	catch(e){
@@ -2045,8 +2062,8 @@ function formatTime(aa){
 			courseDetails["time"]=pp+":"+aalist2[1];
 			
 		}
-		//alert("CD time is !!!");
-		//alert(courseDetails["time"]);
+		alert("CD time is !!!");
+		alert(courseDetails["time"]);
 				
 	}
 	catch(e){
@@ -2056,7 +2073,7 @@ function formatTime(aa){
 function calculateDate(){
 	
 	try{
-		//alert("start calculate date");
+		alert("start calculate date");
 		var today=new Date();//numeric datein month 1-31
 		//alert(today);
 		var month=today.getMonth();//months 0-11
@@ -2072,26 +2089,10 @@ function calculateDate(){
 		nextDateShortMon,nextDateDate;
 		nextDateYear=year;
 		////alert(dd);
-		//alert(courseDetails.dowReal);
+		alert(courseDetails.dowReal);
 		if(dd>courseDetails.dowReal){
 			
 			nextDateDOM=today.getDate()-(dd-courseDetails.dowReal)+7;
-			
-			if([4,6,9,11].indexOf(month) !=-1)
-			{
-				//alert("month in 1");
-				if(nextDateDOM >30) {nextDateDOM-=30;month++;}
-			}
-			if([1,3,5,7,8,10,12].indexOf(month) !=-1)
-			{
-				//alert("month in 2");
-				if(nextDateDOM >31) {nextDateDOM-=31;month++;}
-			}
-			if([2].indexOf(month) !=-1)
-			{
-				//alert("month in 3");
-				if(nextDateDOM >28) {nextDateDOM-=28;month++;}
-			}
 			//alert("next date dom> !!!"+nextDateDOM);
 		}
 		
@@ -2139,18 +2140,16 @@ function calculateDate(){
 	//alert("end date isAAABBB ");
 	//alert(endDateDate);
 	//user may not change time entered previously
+	
 	if(courseDetails.time==null && editstate)
 		courseDetails["time"]=courseDetails.rawtime;
-	
-	if(courseDetails.time==null)
-		{alert("You must choose time"); return;}
 		
 	if(courseDetails.time.length<7)
 		courseDetails["time"]=courseDetails.time+":00";
 	//alert("!!!!##time is "+courseDetails.time);
 	processEnd();
 	//alert("end time is ");
-	///alert(courseDetails["endtime"]);
+	//alert(courseDetails["endtime"]);
 	endDateDate+=courseDetails["endtime"];
 	//alert("end date isAAA ");
 	//alert(endDateDate);
@@ -2159,8 +2158,25 @@ function calculateDate(){
 	//alert(nextDateDate);
 	courseDetails["formattedDate"]=nextDateDate;
 	courseDetails["endDate"]=endDateDate;
-	
+	//alert("end date is ");
+	//alert(courseDetails.endDate);
+	//alert("!!!!!before calculating new enddate ");
+	//var pxx=new Date(courseDetails.formattedDate);
+	//var pxy=new Date(courseDetails.endDate);
+	//alert("!!!!!after calculating new enddate ");
+	//alert(pxy);
 
+		
+	}
+	catch(e){
+		alert("Exception in calculateDate "+e.message);
+	}
+}
+
+function getStartEndDates(){
+	
+	try{
+		
 		
 	}
 	catch(e){
@@ -2251,25 +2267,11 @@ try{
 		//alert("after set calendar repeat rule");
 if(courseDetails.notify)
 	{ 
-	/*alert("course details notify");	
-	alert(courseDetails.formattedDate);
-	alert(courseDetails.endDate);
-	alert(summary);
-	alert(venue);
-	alert(start);
-	alert(end);
-	alert(reminder);
-	alert(rule);*/	
+	//alert("course details notify");		
    recEvent = calendar.createEvent({"summary": summary, "location": venue, "start": start, "end": end, "reminder":reminder,"recurrence": rule});
 	}
 	else{
-	/*	alert("course details not notify");
-		alert(summary);
-	alert(venue);
-	alert(start);
-	alert(end);
-	alert(reminder);
-	alert(rule);*/		
+		//alert("course details not notify");	
 	 recEvent = calendar.createEvent({"summary": summary, "location": venue, "start": start, "end": end, "recurrence": rule});
 	}
    
@@ -2633,13 +2635,11 @@ function deleteEventitem(ev){
 		//delete from calendar
 		var calendar = blackberry.pim.calendar,
     evt;
-	db=abooknamespace.db;
-	
+	 db = window.openDatabase("algcontacts", "1.0", "contacts", 655367);
 	//refresh here get all cal events
 	//alert("before list all events2");
 	listAllEvents2(30);
 	//alert("after listing all events");
-	//alert(courseDetails.eventid);
 	//go through list and find event
 	for (var i=0;i<calevents.length;i++){
 		if(calevents[i].id==courseDetails.eventid)
@@ -2654,8 +2654,7 @@ function deleteEventitem(ev){
 	  trans.executeSql(sqlQuery,[],function(trans,data){
 		editstate=false;
 		//alert("success delete!!!");
-		editstate=false; 
-		if(!deletestate)
+		editstate=false;
 		bb.pushScreen("screen6.html","screen6",{title:"My Timetable", state:"delete"});
 	
 		});
@@ -2688,166 +2687,6 @@ function initializeCourseDetails(){
 	
 }
 /*******END SCREEN 10 FUNCTIONS ********/
-/*****START SCREEN 11 & 12 FUNCTIONS *********/
-
-function navigateToServices(element){
-	try{
-		//read the json
-		
-		loadJSON(function (response){
-			
-			
-			 json=eval(response);
-			
-			var len=json.services.length;
-			items.length=0;
-			
-		 for (var i=0;i<len;i++){
-			 //alert("in loop creating items ");
-			 
-			 createSingleListFragment(json.services[i].type,json.services[i].id);
-	
-		 }
-			
-			
-		});
-		
-		
-	}
-	catch(e){alert("exception thrown in navigate to services "+e.message);}
-}
-function loadJSON(callback) {   
-
-    var xobj = new XMLHttpRequest();
-	
-        xobj.overrideMimeType("application/json");
-	xobj.open('GET', 'services.json', false); 
-	xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-			
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);  
- }
-
-function createListFragment(places,htitle){
-	
-	try{
-		items.length=0;
-		longinfo=false;
-		
-		var len=places.length;
-		
-		
-		for (var i=0;i<len;i++){
-		
-		 item = document.createElement('div');
-		 //alert(item);
-		 item.setAttribute('data-bb-type','item');
-		
-	
-		 item.setAttribute('data-bb-title',places[i].name);
-		 item.setAttribute('data-id',places[i].id);
-		 
-		
-		 item.innerHTML = places[i].location;
-		
-	
-		 items.push(item);	
-		}
-		bb.pushScreen("screen12.html","screen12",{title:htitle});
-	}
-	catch(e){alert("exception thrown in createListFragment "+e.message);}
-}
-function createHealthListFragment(places,htitle,pos){
-	
-	try{
-		items.length=0;
-		longinfo=true;
-		var len=places.length;
-		
-		
-		for (var i=0;i<len;i++){
-		
-		
-		item="<p>"+places[i].name+"</p>"; 
-		 item+="<p>"+json.services[pos].type+","+places[i].location+"</p>";
-		item+="<p>"+places[i].address1+"</p>";
-		 item+="<p>"+places[i].address2+"</p>";
-		 item+="<p>"+places[i].tel+"</p>";
-		 item+="<p>"+places[i].fax+"</p>";
-		  item+="<p>&nbsp;</p>";
-		 
-		
-	
-		 items.push(item);	
-		}
-		bb.pushScreen("screen12.html","screen12",{title:htitle});
-	}
-	catch(e){alert("exception thrown in createListFragment "+e.message);}
-}
-/* create the list of services **/
-function createSingleListFragment(aa,id){
-	
-	try{
-		
-		
-		//items.length=0;
-		
-		 item = document.createElement('div');
-		
-		 item.setAttribute('data-bb-type','item');
-		 
-	
-		 item.setAttribute('data-bb-title',aa);
-		 item.setAttribute('data-id',id);
-		 
-		
-		 item.innerHTML = " ";
-		
-		
-		item.onclick = function(){showServiceDetails(document.getElementById("imgList").selected)};
-		
-		
-		 items.push(item);	
-		
-	}
-	catch(e){alert("exception thrown in create single fragment "+e.message);}
-}
-
-function showServiceDetails(aa){
-	
-	try{
-		
-		var ppp=aa.getAttribute("data-id");
-		
-		
-			var len=json.services.length,htitle;
-			
-		 for (var i=0;i<len;i++){
-			
-			 
-			 if((json.services[i].id)==(ppp)){
-			 	
-				htitle=json.services[i].type;
-				if(json.services[i].id=="hs"){
-				 createHealthListFragment(json.services[i].places,htitle,i);
-				 break;}
-				 else{
-					 createListFragment(json.services[i].places,htitle);
-					 break;
-				 }
-			 }
-	
-		 }
-		
-		
-	}
-	catch(e){alert("exception thrown in showServiceDetails "+e.message);}
-}
-/******END SCREEN 11 FUNCTIONS **********/
 
 
 
