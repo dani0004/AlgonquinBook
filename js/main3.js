@@ -52,19 +52,21 @@ var dowlookup={"11":1,"22":2,"33":3,"44":4,"55":5}	;
 
  
 
-window.onload=init;
+//window.onload=init;
 
 
 function init(){
 
-	//alert("start init");
+	
  /* ******webworks ready event******/
 	var webworksreadyFired = false;
 	
 	document.addEventListener('webworksready', function(e) {
+		
 		if (webworksreadyFired) return;
+		
 			webworksreadyFired = true;
-		//alert("after webworks ready");
+		
 		
 		initializeDatabase();
 		contactDetails=new Array();
@@ -398,6 +400,7 @@ console.log("on screen ready 2");
 						
 			});
 		 /* ******END BB INIT*****/	
+		 
 		  bb.pushScreen('screen1.html','screen1',{title:"My Algonquin Life"});	
 		},false);
 		// bb.pushScreen('screen2.html','screen2',{title:"Add Contacts"});	
